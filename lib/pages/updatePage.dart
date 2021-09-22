@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:patterns_provider/model/post_model.dart';
 import 'package:patterns_provider/pages/updatePageModel.dart';
-import 'package:patterns_provider/services/http_service.dart';
 import 'package:provider/provider.dart';
 
 class UpdatePage extends StatefulWidget {
@@ -30,7 +29,7 @@ class _UpdatePageState extends State<UpdatePage> {
   //
   //
   updateItem() async {
-    await updatePageModel.updateItemProvider(
+    await updatePageModel.updateItemProvider(post!.id,
         textEditingController1.text, textEditingController2.text, post!.userId);
     print("res");
     print(updatePageModel.res);
@@ -45,8 +44,8 @@ class _UpdatePageState extends State<UpdatePage> {
       appBar: AppBar(
         title: Text("${post!.title}"),
       ),
-      body: ChangeNotifierProvider(
-        create: (context) => updatePageModel,
+      body: ChangeNotifierProvider<UpdatePageModel>.value(
+        value: updatePageModel,
         child: Consumer<UpdatePageModel>(
           builder: (context, model, index) => Container(
             padding: EdgeInsets.symmetric(horizontal: 24),

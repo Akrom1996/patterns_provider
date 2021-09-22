@@ -66,9 +66,11 @@ class _HomePageState extends State<HomePage> {
         floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.blue,
           foregroundColor: Colors.white,
-          onPressed: () {
-            Navigator.push(
+          onPressed: () async{
+          var result=await  Navigator.push(
                 context, MaterialPageRoute(builder: (_) => PostPage()));
+          if(result == true)
+            viewModel.apiPostList();
           },
           child: Icon(Icons.add),
         ));
